@@ -53,7 +53,7 @@ int main() {
     g->addedge(1,4);
     g->addedge(1,5);
     g->addedge(2,3);
-    //
+    g->addedge(2,6);
     g->addedge(4,6);
     g->addedge(4,7);
     g->addedge(4,8);
