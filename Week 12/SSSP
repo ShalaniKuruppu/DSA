@@ -1,0 +1,64 @@
+#include <iostream>;
+using namespace std;
+
+int minimum_time(int time[], bool cities[]) // finding minimum time
+{
+    int minimum=INT_MAX,ind;
+
+    for(int i=0;i<6;i++)
+    {
+        if(cities[i]==false && time[i]<=minimum)
+        {
+            minimum=time[i];
+            ind=i;
+        }
+    }
+    return ind;
+}
+// adjacency matrix
+void DijkstraAlgo(int graph[6][6],int src)
+{
+    int time[6]; // // array to calculate the minimum time for each node
+    bool cities[6];// boolean array to mark visited and unvisited for each node
+
+
+    for(int j = 0; j<6; j++)
+    {
+        time[j] = INT_MAX;
+        cities[j] = false;
+    }
+    //as distance to source vertex is zero
+    time[src] = 0;
+
+    for(int k = 0; k<6; k++)
+    {
+        int m=minimum_time(time,cities);
+        cities[m]=true;
+        for(int k = 0; k<6; k++)
+        {
+            // updating the time of neighbouring vertex
+            if(!cities[k] && graph[m][k] && time[m]!=INT_MAX && time[m]+graph[m][k]<time[k])
+                time[k]=time[m]+graph[m][k];
+        }
+    }
+    cout<<"Time taken from city "<<src<<endl;
+    for(int k = 0; k<6; k++)
+    {
+        ;
+        cout<<"Time taken to the city "<<k<<" = "<<time[k]<<endl;
+
+    }
+}
+
+int main()
+{
+    int graph[6][6]={
+            {0, 10, 0, 0, 15, 5},
+            {10, 0, 10, 30, 0, 0},
+            {0, 10, 0, 12, 5, 0},
+            {0, 30, 12, 0, 0, 20},
+            {15, 0, 5, 0, 0, 0},
+            {5, 0, 0, 20, 0, 0}};
+    DijkstraAlgo(graph,5);
+    return 0;
+}
