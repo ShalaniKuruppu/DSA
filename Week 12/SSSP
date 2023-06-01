@@ -42,12 +42,14 @@ void DijkstraAlgo(int graph[6][6],int src)
         }
     }
     cout<<"Time taken from city "<<src<<endl;
+    int sum=0;
     for(int k = 0; k<6; k++)
     {
         ;
         cout<<"Time taken to the city "<<k<<" = "<<time[k]<<endl;
-
+        sum=sum+time[k];
     }
+    cout<<"avg time "<<sum/5;
 }
 
 int main()
