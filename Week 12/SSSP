@@ -1,6 +1,6 @@
 #include <iostream>;
 using namespace std;
-
+// function to find minimum time among unvisited cities
 int minimum_time(int time[], bool cities[]) // finding minimum time
 {
     int minimum=INT_MAX,ind;
@@ -15,13 +15,13 @@ int minimum_time(int time[], bool cities[]) // finding minimum time
     }
     return ind;
 }
-// adjacency matrix
+// function to implement Dijkstra's algorithm with adjacency matrix
 void DijkstraAlgo(int graph[6][6],int src)
 {
     int time[6]; // // array to calculate the minimum time for each node
     bool cities[6];// boolean array to mark visited and unvisited for each node
 
-
+    // set initial values for all cities
     for(int j = 0; j<6; j++)
     {
         time[j] = INT_MAX;
@@ -30,6 +30,7 @@ void DijkstraAlgo(int graph[6][6],int src)
     //as distance to source vertex is zero
     time[src] = 0;
 
+    // loop through all cities and find minimum time for each
     for(int k = 0; k<6; k++)
     {
         int m=minimum_time(time,cities);
@@ -41,19 +42,23 @@ void DijkstraAlgo(int graph[6][6],int src)
                 time[k]=time[m]+graph[m][k];
         }
     }
+
+    // print time taken to reach each city from source
     cout<<"Time taken from city "<<src<<endl;
-    int sum=0;
+    double sum=0;
     for(int k = 0; k<6; k++)
     {
         ;
         cout<<"Time taken to the city "<<k<<" = "<<time[k]<<endl;
         sum=sum+time[k];
     }
-    cout<<"avg time "<<sum/5;
+    // calculate and print average time
+    double avg=sum/5;
+    cout<<"avg time "<<avg;
 }
 
 int main()
-{
+{   // adjacency matrix representing travel times between cities
     int graph[6][6]={
             {0, 10, 0, 0, 15, 5},
             {10, 0, 10, 30, 0, 0},
@@ -61,6 +66,6 @@ int main()
             {0, 30, 12, 0, 0, 20},
             {15, 0, 5, 0, 0, 0},
             {5, 0, 0, 20, 0, 0}};
-    DijkstraAlgo(graph,5);
+    DijkstraAlgo(graph,1);
     return 0;
 }
